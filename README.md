@@ -1,3 +1,10 @@
+# NPM Packages:
+- React Router DOM : 
+        npm install react-router-dom@6
+
+# Documentation:
+    [React Router v6](https://reactrouter.com/en/v6.3.0/getting-started/overview)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
