@@ -11,6 +11,9 @@ import {
   Link,
   Outlet,
   useParams,
+  NavLink,
+  useNavigate,
+  useLocation,
 } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -29,6 +32,7 @@ root.render(
         <Route path="bundles" element={<Bundles/>}/>
       </Route>
 
+      <Route path="/dashboard" element={<Dashboard/>}/>
     </Routes>
   </Router>
 );
@@ -59,10 +63,18 @@ function Learn() {
 }
 
 function Courses() {
+  const courseList = ["React", "Angular", "Vue", "NodeJs"];
+  const randomCourseName = courseList[Math.floor(Math.random() * courseList.length)];
   return (
     <div>
       <h1>Courses List:</h1>
       <h4>Courses Card</h4>
+
+      <p>More Test</p>
+      <NavLink style={({isActive}) => { return { backgroundColor: isActive ? "pink" : "yellow"}}} to={`/learn/courses/${randomCourseName}`}>{randomCourseName}</NavLink>
+      <NavLink className="btn btn-light" to={`/learn/courses/tests`}>tests</NavLink>
+
+
       <Outlet/>
     </div>
   );
@@ -79,10 +91,25 @@ function Bundles() {
 
 // Function reads the URL parameters 
 function CourseId() {
+  const navigate = useNavigate();
+
   const {courseid} = useParams();  /* It's reading the URL parameters. */
   return (
     <div>
       <h1>URL Params is : {courseid}</h1>
+      <button className="btn btn-warning" onClick={() => { navigate("/dashboard", {state: courseid})}}>Price</button>
+
+      <Link to="/dashboard" state={"DJANGO TEST"}>Test Link</Link>
+    </div>
+  );
+}
+
+function Dashboard() {
+  const location = useLocation();
+  return (
+    <div>
+      <h1>Info that I got here is : {location.state}</h1>
+      
     </div>
   );
 }
